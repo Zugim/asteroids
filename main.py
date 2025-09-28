@@ -13,6 +13,12 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    player.Player.containers = (updatable, drawable)
+
     spaceship = player.Player(constants.SCREEN_WIDTH / 2,
                               constants.SCREEN_HEIGHT / 2)
 
@@ -23,7 +29,10 @@ def main():
 
         screen.fill("black")
 
-        spaceship.draw(screen)
+        updatable.update(dt)
+
+        for obj in drawable:
+            obj.draw(screen)
 
         pygame.display.flip()
 
