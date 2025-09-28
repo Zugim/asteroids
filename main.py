@@ -28,8 +28,6 @@ def main():
     asteroidfield.AsteroidField.containers = (updatable)
     shot.Shot.containers = (shots, updatable, drawable)
 
-    projectiles = []
-
     spaceship = player.Player(constants.SCREEN_WIDTH / 2,
                               constants.SCREEN_HEIGHT / 2)
 
@@ -42,10 +40,15 @@ def main():
 
         updatable.update(dt)
 
-        for obj in asteroids:
-            if obj.detect_collision(spaceship):
+        for obstacle in asteroids:
+            if obstacle.detect_collision(spaceship):
                 print("Game over!")
                 sys.exit()
+
+            for projectile in shots:
+                if obstacle.detect_collision(projectile):
+                    projectile.kill()
+                    obstacle.split()
 
         screen.fill("black")
 
