@@ -26,9 +26,6 @@ class Asteroid(circleshape.CircleShape):
         direction1 = self.velocity.rotate(random_angle)
         direction2 = self.velocity.rotate(-random_angle)
 
-        print("DIRECTION1:", direction1)
-        print("DIRECTION2:", direction2)
-
         new_radius = self.radius - constants.ASTEROID_MIN_RADIUS
 
         obstacle1 = Asteroid(self.position.x, self.position.y, new_radius)
